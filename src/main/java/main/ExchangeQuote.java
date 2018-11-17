@@ -31,10 +31,12 @@ public class ExchangeQuote {
         //append snapshot of data to array
         Ticker ticker = marketDataService.getTicker(CurrencyPair.BTC_USD);
 
-        //generate quote from ticker data
-        ExchangeQuote quote = new ExchangeQuote(exchangeName, ticker.getBid(), ticker.getAsk());
+        if (ticker == null) {
+            return new  ExchangeQuote(exchangeName, null, null);
+        }
 
-        return quote;
+        return new  ExchangeQuote(exchangeName, ticker.getBid(), ticker.getAsk());
+
     }
 
     public String getExchangeName() {
